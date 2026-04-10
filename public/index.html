@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HabitWager — Stake money on your habits</title>
+<meta name="description" content="Pick a habit. Put money down. Follow through or lose it. HabitWager makes quitting expensive.">
+<meta property="og:title" content="HabitWager — Stake money on your habits">
+<meta property="og:description" content="Pick a habit. Put money down. Follow through or lose it.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://habitwager.com">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F5F2EA;
+  --card: #FFFFFF;
+  --ink: #0E1B13;
+  --ink-dim: #6B7A6E;
+  --forest: #1F4730;
+  --forest-deep: #0E2418;
+  --moss: #5A8060;
+  --gold: #C08A2D;
+  --red: #B8412E;
+  --line: #E5E0D3;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+body { overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 18px 28px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(245,242,234,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
+}
+.brand {
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: -0.01em;
+  color: var(--forest-deep);
+  text-decoration: none;
+}
+.brand .dot {
+  display: inline-block;
+  width: 7px; height: 7px;
+  background: var(--forest);
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+.nav-cta {
+  background: var(--forest);
+  color: var(--bg);
+  font-size: 13px;
+  font-weight: 500;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+.nav-cta:hover { background: var(--forest-deep); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 120px 28px 80px;
+}
+.mono-tag {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin-bottom: 20px;
+}
+.hero h1 {
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 400;
+  font-size: clamp(42px, 7vw, 72px);
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  color: var(--forest);
+  max-width: 700px;
+  margin-bottom: 20px;
+}
+.hero h1 em {
+  font-style: italic;
+}
+.hero-sub {
+  font-family: 'IBM Plex Serif', serif;
+  font-style: italic;
+  font-size: clamp(16px, 2.5vw, 20px);
+  color: var(--ink-dim);
+  max-width: 480px;
+  line-height: 1.5;
+  margin-bottom: 44px;
+}
+
+/* ── EMAIL FORM ── */
+.email-form {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 460px;
+}
+.email-form input {
+  flex: 1;
+  padding: 16px 20px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--card);
+  color: var(--ink);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.email-form input::placeholder { color: #B0AEA3; }
+.email-form input:focus { border-color: var(--forest); }
+.email-form button {
+  padding: 16px 28px;
+  background: var(--forest);
+  color: var(--bg);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s, transform 0.1s;
+}
+.email-form button:hover { background: var(--forest-deep); }
+.email-form button:active { transform: scale(0.97); }
+.email-form button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.form-note {
+  font-size: 13px;
+  color: var(--ink-dim);
+  margin-top: 14px;
+}
+.form-success {
+  display: none;
+  padding: 16px 24px;
+  background: var(--forest);
+  color: var(--bg);
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 15px;
+}
+.form-error {
+  display: none;
+  color: var(--red);
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+/* ── HOW IT WORKS ── */
+.section {
+  padding: 100px 28px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.section-label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin-bottom: 16px;
+}
+.section h2 {
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 400;
+  font-size: clamp(28px, 4.5vw, 40px);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--forest);
+  margin-bottom: 48px;
+}
+.section h2 em { font-style: italic; }
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.pillar {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 32px 26px;
+}
+.pillar-num {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-bottom: 16px;
+}
+.pillar-icon {
+  font-size: 32px;
+  margin-bottom: 16px;
+}
+.pillar h3 {
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+  color: var(--forest);
+}
+.pillar p {
+  font-size: 14px;
+  line-height: 1.55;
+  color: var(--ink-dim);
+}
+
+/* ── STAKES BAR ── */
+.stakes-bar {
+  padding: 48px 28px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.stakes-bar .inner {
+  max-width: 700px;
+  margin: 0 auto;
+}
+.stat-row {
+  display: flex;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.stat {
+  text-align: center;
+}
+.stat .num {
+  font-family: 'IBM Plex Serif', serif;
+  font-size: 36px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  color: var(--forest);
+}
+.stat .label {
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-dim);
+  margin-top: 6px;
+}
+
+/* ── BOTTOM CTA ── */
+.bottom-cta {
+  padding: 100px 28px;
+  text-align: center;
+}
+.bottom-cta h2 {
+  font-family: 'IBM Plex Serif', serif;
+  font-weight: 400;
+  font-size: clamp(28px, 4.5vw, 40px);
+  letter-spacing: -0.02em;
+  color: var(--forest);
+  margin-bottom: 12px;
+}
+.bottom-cta h2 em { font-style: italic; }
+.bottom-cta p {
+  font-family: 'IBM Plex Serif', serif;
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-dim);
+  margin-bottom: 36px;
+}
+.bottom-cta .email-form {
+  margin: 0 auto;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 36px 28px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+  font-family: 'IBM Plex Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-dim);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 700px) {
+  .pillars { grid-template-columns: 1fr; }
+  .email-form { flex-direction: column; }
+  .email-form button { width: 100%; }
+  .hero { padding: 100px 20px 60px; }
+  .section { padding: 60px 20px; }
+  .stat-row { gap: 28px; }
+  nav { padding: 14px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="brand"><span class="dot"></span>HabitWager</a>
+  <a href="#signup" class="nav-cta">Get early access</a>
+</nav>
+
+<section class="hero">
+  <div class="mono-tag">Coming soon</div>
+  <h1>Stake <em>money</em> on your habits.</h1>
+  <p class="hero-sub">Pick a habit. Put real money down. Follow through or lose it. Quitting is no longer free.</p>
+
+  <div id="signup">
+    <form class="email-form" id="email-form">
+      <input type="email" name="email" placeholder="you@email.com" required autocomplete="email">
+      <button type="submit">Join waitlist</button>
+    </form>
+    <div class="form-success" id="form-success">You're on the list. We'll be in touch.</div>
+    <div class="form-error" id="form-error"></div>
+    <p class="form-note">No spam. Just early access when we launch.</p>
+  </div>
+</section>
+
+<div class="stakes-bar">
+  <div class="inner">
+    <div class="stat-row">
+      <div class="stat">
+        <div class="num">$5–$100</div>
+        <div class="label">Daily stakes</div>
+      </div>
+      <div class="stat">
+        <div class="num">7–30</div>
+        <div class="label">Day challenges</div>
+      </div>
+      <div class="stat">
+        <div class="num">AI</div>
+        <div class="label">Coach + audits</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<section class="section">
+  <div class="section-label">How it works</div>
+  <h2>Three pillars. <em>One mechanic.</em></h2>
+
+  <div class="pillars">
+    <div class="pillar">
+      <div class="pillar-num">01</div>
+      <div class="pillar-icon">$</div>
+      <h3>The Stake</h3>
+      <p>Pick your habits. Pick your duration. Put real money in escrow. If you follow through, you keep it. If you don't, you lose it.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">02</div>
+      <div class="pillar-icon">&bull;</div>
+      <h3>The Coach</h3>
+      <p>An AI coach builds your contract, checks in daily, and drops surprise audits. No honor system. Proof, or it didn't happen.</p>
+    </div>
+    <div class="pillar">
+      <div class="pillar-num">03</div>
+      <div class="pillar-icon">#</div>
+      <h3>The Leaderboard</h3>
+      <p>Public by default. Your streak, your stake, your habits — visible to everyone. Social pressure does what private willpower can't.</p>
+    </div>
+  </div>
+</section>
+
+<section class="bottom-cta">
+  <h2>Ready to <em>wager</em>?</h2>
+  <p>Be first in line when we launch.</p>
+  <form class="email-form" id="email-form-bottom">
+    <input type="email" name="email" placeholder="you@email.com" required autocomplete="email">
+    <button type="submit">Join waitlist</button>
+  </form>
+  <div class="form-success" id="form-success-bottom">You're on the list. We'll be in touch.</div>
+  <div class="form-error" id="form-error-bottom"></div>
+</section>
+
+<footer>
+  &copy; 2026 HabitWager
+</footer>
+
+<script>
+function setupForm(formId, successId, errorId) {
+  const form = document.getElementById(formId);
+  const success = document.getElementById(successId);
+  const error = document.getElementById(errorId);
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = form.querySelector('input[name="email"]').value.trim();
+    const btn = form.querySelector('button');
+    btn.disabled = true;
+    btn.textContent = 'Joining...';
+    error.style.display = 'none';
+
+    try {
+      const res = await fetch('/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email })
+      });
+      const data = await res.json();
+      if (res.ok) {
+        form.style.display = 'none';
+        success.style.display = 'block';
+        const note = form.nextElementSibling?.nextElementSibling;
+        if (note?.classList?.contains('form-note')) note.style.display = 'none';
+      } else {
+        error.textContent = data.error || 'Something went wrong.';
+        error.style.display = 'block';
+        btn.disabled = false;
+        btn.textContent = 'Join waitlist';
+      }
+    } catch {
+      error.textContent = 'Connection error. Try again.';
+      error.style.display = 'block';
+      btn.disabled = false;
+      btn.textContent = 'Join waitlist';
+    }
+  });
+}
+
+setupForm('email-form', 'form-success', 'form-error');
+setupForm('email-form-bottom', 'form-success-bottom', 'form-error-bottom');
+</script>
+
+</body>
+</html>
