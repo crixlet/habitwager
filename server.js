@@ -5,6 +5,29 @@ const path = require('path');
 const app = express();
 const PORT = process.env.PORT || 3000;
 const SUBS_FILE = path.join(__dirname, 'subscribers.json');
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+const ADMIN_EMAILS = (process.env.ADMIN_EMAILS || 'ah@aaronhanson.com').split(',').map(e => e.trim());
+
+async function notifyAdmin(email, totalCount) {
+  if (!RESEND_API_KEY) return;
+  try {
+    await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${RESEND_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        from: 'HabitWager <notifications@habitwager.com>',
+        to: ADMIN_EMAILS,
+        subject: `New waitlist signup (#${totalCount}): ${email}`,
+        text: `${email} just joined the HabitWager waitlist.\n\nTotal subscribers: ${totalCount}\nTime: ${new Date().toISOString()}`,
+      }),
+    });
+  } catch (err) {
+    console.error('[NOTIFY] Failed to send admin email:', err.message);
+  }
+}
 
 // Load existing subscribers
 let subscribers = [];
@@ -32,6 +55,7 @@ app.post('/subscribe', (req, res) => {
   save();
   console.log(`[SUBSCRIBE] ${email} (total: ${subscribers.length})`);
   res.json({ ok: true });
+  notifyAdmin(email, subscribers.length);
 });
 
 // Simple admin view — protect with a token in prod if needed

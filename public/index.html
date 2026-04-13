@@ -11,25 +11,27 @@
 <meta property="og:url" content="https://habitwager.com">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #F5F2EA;
-  --card: #FFFFFF;
-  --ink: #0E1B13;
-  --ink-dim: #6B7A6E;
+  --dark: #0E2418;
   --forest: #1F4730;
-  --forest-deep: #0E2418;
-  --moss: #5A8060;
-  --gold: #C08A2D;
-  --red: #B8412E;
-  --line: #E5E0D3;
+  --moss: #3A7D4A;
+  --leaf: #4CAF50;
+  --light: #F9F9F9;
+  --white: #FFFFFF;
+  --text: #3a3a3a;
+  --text-dim: #656565;
+  --text-on-dark: rgba(255,255,255,0.7);
+  --border: #E5E5E5;
 }
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html {
-  background: var(--bg);
-  color: var(--ink);
+  background: var(--white);
+  color: var(--text);
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 18px;
+  line-height: 1.56;
   -webkit-font-smoothing: antialiased;
   scroll-behavior: smooth;
 }
@@ -39,84 +41,70 @@ body { overflow-x: hidden; }
 nav {
   position: fixed; top: 0; left: 0; right: 0;
   z-index: 100;
-  padding: 18px 28px;
+  padding: 16px 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(245,242,234,0.85);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--line);
+  background: rgba(14,36,24,0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }
 .brand {
-  font-family: 'IBM Plex Serif', serif;
-  font-weight: 600;
-  font-size: 18px;
-  letter-spacing: -0.01em;
-  color: var(--forest-deep);
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
   text-decoration: none;
-}
-.brand .dot {
-  display: inline-block;
-  width: 7px; height: 7px;
-  background: var(--forest);
-  border-radius: 50%;
-  margin-right: 6px;
-  vertical-align: middle;
+  letter-spacing: -0.02em;
 }
 .nav-cta {
-  background: var(--forest);
-  color: var(--bg);
-  font-size: 13px;
-  font-weight: 500;
-  padding: 10px 20px;
-  border-radius: 8px;
+  background: var(--white);
+  color: var(--dark);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 48px;
   border: none;
   cursor: pointer;
   text-decoration: none;
-  transition: background 0.2s;
+  transition: all 0.2s linear;
 }
-.nav-cta:hover { background: var(--forest-deep); }
+.nav-cta:hover { background: var(--leaf); color: var(--white); }
 
 /* ── HERO ── */
 .hero {
+  background: var(--dark);
+  color: var(--white);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 120px 28px 80px;
+  padding: 140px 32px 100px;
 }
-.mono-tag {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.18em;
+.hero-tag {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--moss);
-  margin-bottom: 20px;
+  color: var(--leaf);
+  margin-bottom: 24px;
 }
 .hero h1 {
-  font-family: 'IBM Plex Serif', serif;
-  font-weight: 400;
-  font-size: clamp(42px, 7vw, 72px);
+  font-size: clamp(40px, 6.5vw, 64px);
+  font-weight: 700;
   letter-spacing: -0.035em;
-  line-height: 1.05;
-  color: var(--forest);
-  max-width: 700px;
-  margin-bottom: 20px;
-}
-.hero h1 em {
-  font-style: italic;
+  line-height: 1.1;
+  max-width: 750px;
+  margin-bottom: 24px;
 }
 .hero-sub {
-  font-family: 'IBM Plex Serif', serif;
-  font-style: italic;
-  font-size: clamp(16px, 2.5vw, 20px);
-  color: var(--ink-dim);
-  max-width: 480px;
-  line-height: 1.5;
-  margin-bottom: 44px;
+  font-size: clamp(16px, 2vw, 20px);
+  font-weight: 400;
+  color: var(--text-on-dark);
+  max-width: 520px;
+  line-height: 1.6;
+  margin-bottom: 48px;
 }
 
 /* ── EMAIL FORM ── */
@@ -124,223 +112,260 @@ nav {
   display: flex;
   gap: 10px;
   width: 100%;
-  max-width: 460px;
+  max-width: 480px;
 }
 .email-form input {
   flex: 1;
   padding: 16px 20px;
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  background: var(--card);
-  color: var(--ink);
+  font-size: 16px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 48px;
+  background: rgba(255,255,255,0.08);
+  color: var(--white);
   outline: none;
   transition: border-color 0.2s;
 }
-.email-form input::placeholder { color: #B0AEA3; }
-.email-form input:focus { border-color: var(--forest); }
+.email-form input::placeholder { color: rgba(255,255,255,0.35); }
+.email-form input:focus { border-color: var(--leaf); }
 .email-form button {
-  padding: 16px 28px;
-  background: var(--forest);
-  color: var(--bg);
+  padding: 16px 32px;
+  background: var(--leaf);
+  color: var(--white);
   font-family: 'DM Sans', sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 600;
   border: none;
-  border-radius: 10px;
+  border-radius: 48px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.2s, transform 0.1s;
+  transition: all 0.2s linear;
 }
-.email-form button:hover { background: var(--forest-deep); }
+.email-form button:hover { background: var(--moss); }
 .email-form button:active { transform: scale(0.97); }
-.email-form button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
+.email-form button:disabled { opacity: 0.5; cursor: not-allowed; }
 .form-note {
   font-size: 13px;
-  color: var(--ink-dim);
-  margin-top: 14px;
+  color: var(--text-on-dark);
+  margin-top: 16px;
 }
 .form-success {
   display: none;
-  padding: 16px 24px;
-  background: var(--forest);
-  color: var(--bg);
-  border-radius: 10px;
-  font-weight: 500;
-  font-size: 15px;
+  padding: 16px 28px;
+  background: var(--leaf);
+  color: var(--white);
+  border-radius: 48px;
+  font-weight: 600;
+  font-size: 16px;
 }
 .form-error {
   display: none;
-  color: var(--red);
+  color: #ef5350;
   font-size: 14px;
   margin-top: 10px;
 }
 
-/* ── HOW IT WORKS ── */
-.section {
-  padding: 100px 28px;
-  max-width: 900px;
-  margin: 0 auto;
+/* ── LIGHT section variants ── */
+.email-form--light input {
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--text);
 }
-.section-label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--moss);
-  margin-bottom: 16px;
-}
-.section h2 {
-  font-family: 'IBM Plex Serif', serif;
-  font-weight: 400;
-  font-size: clamp(28px, 4.5vw, 40px);
-  letter-spacing: -0.02em;
-  line-height: 1.15;
-  color: var(--forest);
-  margin-bottom: 48px;
-}
-.section h2 em { font-style: italic; }
+.email-form--light input::placeholder { color: #aaa; }
+.email-form--light input:focus { border-color: var(--forest); }
+.form-note--light { color: var(--text-dim); }
 
-.pillars {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-}
-.pillar {
-  background: var(--card);
-  border: 1px solid var(--line);
-  border-radius: 16px;
-  padding: 32px 26px;
-}
-.pillar-num {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--ink-dim);
-  margin-bottom: 16px;
-}
-.pillar-icon {
-  font-size: 32px;
-  margin-bottom: 16px;
-}
-.pillar h3 {
-  font-family: 'IBM Plex Serif', serif;
-  font-weight: 600;
-  font-size: 20px;
-  letter-spacing: -0.01em;
-  margin-bottom: 10px;
-  color: var(--forest);
-}
-.pillar p {
-  font-size: 14px;
-  line-height: 1.55;
-  color: var(--ink-dim);
-}
-
-/* ── STAKES BAR ── */
-.stakes-bar {
-  padding: 48px 28px;
+/* ── STATS BAR ── */
+.stats-bar {
+  background: var(--forest);
+  padding: 56px 32px;
   text-align: center;
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
 }
-.stakes-bar .inner {
-  max-width: 700px;
+.stats-bar .inner {
+  max-width: 900px;
   margin: 0 auto;
 }
 .stat-row {
   display: flex;
   justify-content: center;
-  gap: 48px;
+  gap: 64px;
   flex-wrap: wrap;
 }
-.stat {
-  text-align: center;
-}
+.stat { text-align: center; }
 .stat .num {
-  font-family: 'IBM Plex Serif', serif;
-  font-size: 36px;
-  font-weight: 400;
+  font-size: 40px;
+  font-weight: 700;
   letter-spacing: -0.03em;
-  color: var(--forest);
+  color: var(--white);
 }
 .stat .label {
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--ink-dim);
+  color: rgba(255,255,255,0.6);
   margin-top: 6px;
+}
+
+/* ── HOW IT WORKS ── */
+.section {
+  padding: 100px 32px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.section--dark {
+  background: var(--dark);
+  color: var(--white);
+  max-width: none;
+}
+.section--dark .section-inner {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.section-tag {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--leaf);
+  margin-bottom: 16px;
+}
+.section h2 {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 56px;
+}
+.section--dark h2 { color: var(--white); }
+
+.pillars {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.pillar {
+  background: var(--light);
+  border-radius: 16px;
+  padding: 36px 28px;
+}
+.section--dark .pillar {
+  background: rgba(255,255,255,0.06);
+}
+.pillar-num {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--leaf);
+  letter-spacing: -0.04em;
+  margin-bottom: 16px;
+  line-height: 1;
+}
+.section--dark .pillar-num { color: var(--leaf); }
+.pillar h3 {
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-bottom: 10px;
+}
+.section--dark .pillar h3 { color: var(--white); }
+.pillar p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-dim);
+}
+.section--dark .pillar p { color: var(--text-on-dark); }
+
+/* ── HOW VERIFICATION WORKS ── */
+.verify-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+}
+.verify-item {
+  padding: 32px 0;
+}
+.verify-item .icon {
+  width: 48px;
+  height: 48px;
+  background: var(--leaf);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--white);
+  margin-bottom: 20px;
+}
+.verify-item h4 {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.verify-item p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-dim);
 }
 
 /* ── BOTTOM CTA ── */
 .bottom-cta {
-  padding: 100px 28px;
+  background: var(--dark);
+  color: var(--white);
+  padding: 120px 32px;
   text-align: center;
 }
 .bottom-cta h2 {
-  font-family: 'IBM Plex Serif', serif;
-  font-weight: 400;
-  font-size: clamp(28px, 4.5vw, 40px);
-  letter-spacing: -0.02em;
-  color: var(--forest);
-  margin-bottom: 12px;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 16px;
 }
-.bottom-cta h2 em { font-style: italic; }
 .bottom-cta p {
-  font-family: 'IBM Plex Serif', serif;
-  font-style: italic;
-  font-size: 16px;
-  color: var(--ink-dim);
-  margin-bottom: 36px;
+  font-size: 18px;
+  color: var(--text-on-dark);
+  margin-bottom: 40px;
 }
-.bottom-cta .email-form {
-  margin: 0 auto;
-}
+.bottom-cta .email-form { margin: 0 auto; }
 
 /* ── FOOTER ── */
 footer {
-  padding: 36px 28px;
+  background: var(--dark);
+  padding: 24px 32px;
   text-align: center;
-  border-top: 1px solid var(--line);
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 11px;
-  letter-spacing: 0.06em;
-  color: var(--ink-dim);
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  border-top: 1px solid rgba(255,255,255,0.08);
 }
 
 /* ── RESPONSIVE ── */
 @media (max-width: 700px) {
-  .pillars { grid-template-columns: 1fr; }
+  .pillars, .verify-grid { grid-template-columns: 1fr; }
   .email-form { flex-direction: column; }
   .email-form button { width: 100%; }
-  .hero { padding: 100px 20px 60px; }
-  .section { padding: 60px 20px; }
-  .stat-row { gap: 28px; }
+  .hero { padding: 120px 20px 80px; }
+  .section { padding: 72px 20px; }
+  .stat-row { gap: 32px; }
   nav { padding: 14px 20px; }
+  .bottom-cta { padding: 80px 20px; }
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a href="#" class="brand"><span class="dot"></span>HabitWager</a>
+  <a href="#" class="brand">HabitWager</a>
   <a href="#signup" class="nav-cta">Get early access</a>
 </nav>
 
 <section class="hero">
-  <div class="mono-tag">Coming soon</div>
-  <h1>Stake <em>money</em> on your habits.</h1>
+  <div class="hero-tag">Coming Soon</div>
+  <h1>Stake money on your habits.</h1>
   <p class="hero-sub">Pick a habit. Put real money down. Follow through or lose it. Quitting is no longer free.</p>
 
   <div id="signup">
     <form class="email-form" id="email-form">
-      <input type="email" name="email" placeholder="you@email.com" required autocomplete="email">
+      <input type="email" name="email" placeholder="Enter your email" required autocomplete="email">
       <button type="submit">Join waitlist</button>
     </form>
     <div class="form-success" id="form-success">You're on the list. We'll be in touch.</div>
@@ -349,15 +374,15 @@ footer {
   </div>
 </section>
 
-<div class="stakes-bar">
+<div class="stats-bar">
   <div class="inner">
     <div class="stat-row">
       <div class="stat">
-        <div class="num">$5–$100</div>
+        <div class="num">$5 – $100</div>
         <div class="label">Daily stakes</div>
       </div>
       <div class="stat">
-        <div class="num">7–30</div>
+        <div class="num">7 – 30</div>
         <div class="label">Day challenges</div>
       </div>
       <div class="stat">
@@ -369,36 +394,53 @@ footer {
 </div>
 
 <section class="section">
-  <div class="section-label">How it works</div>
-  <h2>Three pillars. <em>One mechanic.</em></h2>
+  <div class="section-tag">How it works</div>
+  <h2>Three pillars. One mechanic.</h2>
 
   <div class="pillars">
     <div class="pillar">
       <div class="pillar-num">01</div>
-      <div class="pillar-icon">$</div>
       <h3>The Stake</h3>
       <p>Pick your habits. Pick your duration. Put real money in escrow. If you follow through, you keep it. If you don't, you lose it.</p>
     </div>
     <div class="pillar">
       <div class="pillar-num">02</div>
-      <div class="pillar-icon">&bull;</div>
       <h3>The Coach</h3>
-      <p>An AI coach builds your contract, checks in daily, and drops surprise audits. No honor system. Proof, or it didn't happen.</p>
+      <p>An AI coach builds your contract, checks in daily, and drops surprise audits. You submit photo or screenshot proof. Fail an audit, forfeit your stake.</p>
     </div>
     <div class="pillar">
       <div class="pillar-num">03</div>
-      <div class="pillar-icon">#</div>
       <h3>The Leaderboard</h3>
       <p>Public by default. Your streak, your stake, your habits — visible to everyone. Social pressure does what private willpower can't.</p>
     </div>
   </div>
 </section>
 
+<section class="section section--dark">
+  <div class="section-inner">
+    <div class="section-tag">Verification</div>
+    <h2>No honor system. Real proof.</h2>
+
+    <div class="verify-grid">
+      <div class="verify-item">
+        <div class="icon">P</div>
+        <h4>Photo &amp; screenshot proof</h4>
+        <p>Snap your meal, screenshot your reading app, show the CGM. Every habit has a proof method — you submit it, the coach reviews.</p>
+      </div>
+      <div class="verify-item">
+        <div class="icon">?</div>
+        <h4>Random AI audits</h4>
+        <p>The coach drops surprise audits at unpredictable intervals. You never know which day. Every day has to be real.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="bottom-cta">
-  <h2>Ready to <em>wager</em>?</h2>
+  <h2>Ready to put money on it?</h2>
   <p>Be first in line when we launch.</p>
   <form class="email-form" id="email-form-bottom">
-    <input type="email" name="email" placeholder="you@email.com" required autocomplete="email">
+    <input type="email" name="email" placeholder="Enter your email" required autocomplete="email">
     <button type="submit">Join waitlist</button>
   </form>
   <div class="form-success" id="form-success-bottom">You're on the list. We'll be in touch.</div>
@@ -433,8 +475,6 @@ function setupForm(formId, successId, errorId) {
       if (res.ok) {
         form.style.display = 'none';
         success.style.display = 'block';
-        const note = form.nextElementSibling?.nextElementSibling;
-        if (note?.classList?.contains('form-note')) note.style.display = 'none';
       } else {
         error.textContent = data.error || 'Something went wrong.';
         error.style.display = 'block';
