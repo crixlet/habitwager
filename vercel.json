@@ -1,0 +1,14 @@
+{
+  "framework": null,
+  "buildCommand": "",
+  "outputDirectory": "public",
+  "rewrites": [
+    { "source": "/affiliates", "destination": "/affiliates.html" },
+    { "source": "/coaches", "destination": "/coaches.html" },
+    { "source": "/course-creators", "destination": "/course-creators.html" },
+    { "source": "/challenge-influencers", "destination": "/challenge-influencers.html" },
+    { "source": "/funded-founders", "destination": "/funded-founders.html" },
+    { "source": "/yc-founders", "destination": "/yc-founders.html" },
+    { "source": "/subscribe", "destination": "/api/subscribe" }
+  ]
+}
