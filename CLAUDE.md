@@ -1,34 +1,31 @@
 # HabitWager Landing Pages
 
+Static HTML landing pages for audience-specific outreach. Separate from the main HabitWager Rails app.
+
 ## Project Structure
 
-- `public/` — Static HTML landing pages served by Vercel
-  - `index.html` — Main landing page (habitwager.vercel.app)
+- `public/` — Static HTML landing pages deployed via GitHub Pages
+  - `index.html` — Main landing page
   - `coaches.html`, `affiliates.html`, etc. — Audience-specific pages
-- `api/subscribe.js` — Vercel serverless function for email waitlist signups
-- `vercel.json` — Routing config (clean URLs, rewrites)
-- `.github/workflows/deploy.yml` — Auto-deploys to Vercel on push to main
 
 ## Deployment
 
-**Auto-deploy**: Push to `main` → GitHub Action deploys to Vercel production.
+**Auto-deploy**: Push to `main` → GitHub Actions deploys `public/` to GitHub Pages.
 
-Pages are live at `https://habitwager.vercel.app`. Clean URLs:
-- `/coaches` → `coaches.html`
-- `/affiliates` → `affiliates.html`
-- `/yc-founders` → `yc-founders.html`
-- `/funded-founders` → `funded-founders.html`
-- `/course-creators` → `course-creators.html`
-- `/challenge-influencers` → `challenge-influencers.html`
+Live at: `https://crixlet.github.io/habitwager/` (will move to `go.habitwager.com`)
+
+Pages use `.html` extension in URLs:
+- `/coaches.html`
+- `/affiliates.html`
+- `/yc-founders.html`
+- `/funded-founders.html`
+- `/course-creators.html`
+- `/challenge-influencers.html`
 
 ## Adding a New Landing Page
 
 1. Create `public/<page-name>.html` (self-contained HTML, inline styles)
-2. Add a rewrite in `vercel.json`:
-   ```json
-   { "source": "/<page-name>", "destination": "/<page-name>.html" }
-   ```
-3. Commit and push to `main` — it auto-deploys
+2. Commit and push to `main` — it auto-deploys
 
 ## Editing Pages
 
