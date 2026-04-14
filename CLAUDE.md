@@ -12,7 +12,7 @@ Static HTML landing pages for audience-specific outreach. Separate from the main
 
 **Auto-deploy**: Push to `main` → GitHub Actions deploys `public/` to GitHub Pages.
 
-Live at: `https://crixlet.github.io/habitwager/` (will move to `go.habitwager.com`)
+Live at: `https://go.habitwager.com/`
 
 Pages use `.html` extension in URLs:
 - `/coaches.html`
