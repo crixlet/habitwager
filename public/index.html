@@ -308,6 +308,88 @@ nav {
   color: var(--text-dim);
 }
 
+/* ── LEADERBOARD ── */
+.leaderboard-shell {
+  background: linear-gradient(180deg, #f4f8f3 0%, #ffffff 100%);
+  border: 1px solid var(--border);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 18px 60px rgba(14,36,24,0.08);
+}
+.leaderboard-header,
+.leaderboard-row {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1.8fr) minmax(120px, 1fr) minmax(90px, 0.7fr) minmax(90px, 0.7fr);
+  gap: 16px;
+  align-items: center;
+  padding: 18px 24px;
+}
+.leaderboard-header {
+  background: var(--dark);
+  color: rgba(255,255,255,0.72);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.leaderboard-row {
+  border-top: 1px solid rgba(14,36,24,0.08);
+  background: rgba(255,255,255,0.92);
+}
+.leaderboard-row:nth-child(even) {
+  background: rgba(244,248,243,0.92);
+}
+.leaderboard-rank {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  color: var(--forest);
+}
+.leaderboard-person {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+.leaderboard-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--forest), var(--leaf));
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  flex: 0 0 auto;
+}
+.leaderboard-meta {
+  min-width: 0;
+}
+.leaderboard-name {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--dark);
+}
+.leaderboard-handle {
+  font-size: 13px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.leaderboard-habit,
+.leaderboard-streak,
+.leaderboard-stake {
+  font-size: 15px;
+  color: var(--text);
+}
+.leaderboard-streak strong,
+.leaderboard-stake strong {
+  color: var(--dark);
+}
+
 /* ── BOTTOM CTA ── */
 .bottom-cta {
   background: var(--dark);
@@ -348,6 +430,28 @@ footer {
   .stat-row { gap: 32px; }
   nav { padding: 14px 20px; }
   .bottom-cta { padding: 80px 20px; }
+  .leaderboard-header {
+    display: none;
+  }
+  .leaderboard-row {
+    grid-template-columns: 56px 1fr;
+    gap: 14px;
+    padding: 18px 18px 16px;
+  }
+  .leaderboard-person {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .leaderboard-rank {
+    grid-row: 1 / span 3;
+    align-self: start;
+  }
+  .leaderboard-habit,
+  .leaderboard-streak,
+  .leaderboard-stake {
+    grid-column: 2;
+    font-size: 14px;
+  }
 }
 </style>
 </head>
@@ -432,6 +536,91 @@ footer {
         <h4>Random AI audits</h4>
         <p>The coach drops surprise audits at unpredictable intervals. You never know which day. Every day has to be real.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="section-tag">Leaderboard</div>
+  <h2>Looks a lot different when everyone can see the standings.</h2>
+
+  <div class="leaderboard-shell" aria-label="Sample public leaderboard">
+    <div class="leaderboard-header">
+      <div>Rank</div>
+      <div>Player</div>
+      <div>Habit</div>
+      <div>Streak</div>
+      <div>Stake</div>
+    </div>
+
+    <div class="leaderboard-row">
+      <div class="leaderboard-rank">#1</div>
+      <div class="leaderboard-person">
+        <div class="leaderboard-avatar">AL</div>
+        <div class="leaderboard-meta">
+          <div class="leaderboard-name">Ava Lin</div>
+          <div class="leaderboard-handle">@avalin</div>
+        </div>
+      </div>
+      <div class="leaderboard-habit">Morning run</div>
+      <div class="leaderboard-streak"><strong>41 days</strong></div>
+      <div class="leaderboard-stake"><strong>$50/day</strong></div>
+    </div>
+
+    <div class="leaderboard-row">
+      <div class="leaderboard-rank">#2</div>
+      <div class="leaderboard-person">
+        <div class="leaderboard-avatar">MR</div>
+        <div class="leaderboard-meta">
+          <div class="leaderboard-name">Marcus Reed</div>
+          <div class="leaderboard-handle">@marcusbuilds</div>
+        </div>
+      </div>
+      <div class="leaderboard-habit">No sugar</div>
+      <div class="leaderboard-streak"><strong>33 days</strong></div>
+      <div class="leaderboard-stake"><strong>$35/day</strong></div>
+    </div>
+
+    <div class="leaderboard-row">
+      <div class="leaderboard-rank">#3</div>
+      <div class="leaderboard-person">
+        <div class="leaderboard-avatar">NS</div>
+        <div class="leaderboard-meta">
+          <div class="leaderboard-name">Nina Shah</div>
+          <div class="leaderboard-handle">@ninashah</div>
+        </div>
+      </div>
+      <div class="leaderboard-habit">Read 30 min</div>
+      <div class="leaderboard-streak"><strong>28 days</strong></div>
+      <div class="leaderboard-stake"><strong>$20/day</strong></div>
+    </div>
+
+    <div class="leaderboard-row">
+      <div class="leaderboard-rank">#4</div>
+      <div class="leaderboard-person">
+        <div class="leaderboard-avatar">DT</div>
+        <div class="leaderboard-meta">
+          <div class="leaderboard-name">Dylan Tran</div>
+          <div class="leaderboard-handle">@dylant</div>
+        </div>
+      </div>
+      <div class="leaderboard-habit">Lift weights</div>
+      <div class="leaderboard-streak"><strong>21 days</strong></div>
+      <div class="leaderboard-stake"><strong>$40/day</strong></div>
+    </div>
+
+    <div class="leaderboard-row">
+      <div class="leaderboard-rank">#5</div>
+      <div class="leaderboard-person">
+        <div class="leaderboard-avatar">ER</div>
+        <div class="leaderboard-meta">
+          <div class="leaderboard-name">Elena Rossi</div>
+          <div class="leaderboard-handle">@elenarossi</div>
+        </div>
+      </div>
+      <div class="leaderboard-habit">8k steps</div>
+      <div class="leaderboard-streak"><strong>19 days</strong></div>
+      <div class="leaderboard-stake"><strong>$15/day</strong></div>
     </div>
   </div>
 </section>
